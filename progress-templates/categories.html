@@ -1,0 +1,70 @@
+{% extends "common.html" %}
+{% block title %}{{ super() }}—By Category{% endblock %}
+{% block content %}
+  <header>
+    <h1>All Nursery Rhymes by Category</h1>
+  </header>
+  {% for category in songbook.categories %}
+    <section>
+    <h1><a name="{{category.slug}}" href="{{category.slug}}/">{{ category.name | title }}</a></h1>
+  {% for song in category.songs %}
+    <article class="song">
+      {% if song.categories[0][1] != category %}
+        <h2><a href="#{{song.slug}}">{{song.title}}</a> (found in "{{ song.categories[0][1].name | title }}")</h2>
+      {% else %}
+      <h2><a name="{{song.slug}}" href="../songs/{{song.slug}}/">{{song.title}}</a></h2>
+      <dl class="metadata">
+        {% if song.see %}
+          <dt>See also</dt>
+          <dd>
+            {%- set comma = joiner(", ") -%}
+            {%- for title, see_song in song.see -%}
+              {{ comma() }}
+              {%- if see_song -%}
+                <a href="#{{see_song.slug}}">{{title}}</a>
+              {%- else -%}
+                {{title}}
+              {%- endif %}
+            {%- endfor -%}
+          </dd>
+        {% endif %}
+        {% if song.categories %}
+          <dt>Categories</dt>
+          <dd>
+            {%- set comma = joiner(", ") -%}
+            {%- for name, song_category in song.categories -%}
+              {{ comma() }}
+              {%- if song_category -%}
+                {%- if song_category == category -%}
+                  <strong>{{name}}</strong>
+                {%- else -%}
+                  <a href="#{{song_category.slug}}">{{name}}</a>
+                {%- endif -%}
+              {%- else -%}
+                {{name}}
+              {%- endif %}
+            {%- endfor -%}
+        {% endif %}
+        {% if song.aka %}
+          <dt>Also known as</dt>
+          <dd>{{ song.aka | join(", ") }}</dd>
+        {% endif %}
+        {% if song.tune %}
+          <dt>To the tune of</dt> <dd>{{song.tune}}</dd>
+        {% endif %}
+        {% if song.source %}
+          <dt>Source</dt> <dd>{{song.source}}</dd>
+        {% endif %}
+        {% if song.copyright %}
+          <dt>Copyright</dt> <dd>{{song.copyright}}</dd>
+        {% endif %}
+      </dl>
+      <div class="lyrics">
+        {{song.lyrics}}
+      </div> <!-- lyrics -->
+    {% endif %}
+    </article>
+  {% endfor %}
+    </section>
+  {% endfor %}
+{% endblock content %}

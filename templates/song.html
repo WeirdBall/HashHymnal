@@ -1,0 +1,52 @@
+{% extends "common.html" %}
+{% block title %}{{ super() }}—{{song.title}}{% endblock %}
+{% block content %}
+    <article class="song">
+      <h1><a name="{{song.slug}}">{{song.title}}</a></h1>
+      <dl class="metadata">
+        {% if song.see %}
+          <dt>See also</dt>
+          <dd>
+            {%- set comma = joiner(", ") -%}
+            {%- for title, see_song in song.see -%}
+              {{ comma() }}
+              {%- if see_song -%}
+                <a href="../{{see_song.slug}}/">{{title}}</a>
+              {%- else -%}
+                {{title}}
+              {%- endif %}
+            {%- endfor -%}
+          </dd>
+        {% endif %}
+        {% if song.categories %}
+          <dt>Categories</dt>
+          <dd>
+            {%- set comma = joiner(", ") -%}
+            {%- for name, song_category in song.categories -%}
+              {{ comma() }}
+              {%- if song_category -%}
+                <a href="../../categories/{{song_category.slug}}/">{{name}}</a>
+              {%- else -%}
+                {{name}}
+              {%- endif %}
+            {%- endfor -%}
+        {% endif %}
+        {% if song.aka %}
+          <dt>Also known as</dt>
+          <dd>{{ song.aka | join(", ") }}</dd>
+        {% endif %}
+        {% if song.tune %}
+          <dt>To the tune of</dt> <dd>{{song.tune}}</dd>
+        {% endif %}
+        {% if song.source %}
+          <dt>Source</dt> <dd>{{song.source}}</dd>
+        {% endif %}
+        {% if song.copyright %}
+          <dt>Copyright</dt> <dd>{{song.copyright}}</dd>
+        {% endif %}
+      </dl>
+      <div class="lyrics">
+        {{song.lyrics}}
+      </div> <!-- lyrics -->
+    </article>
+{% endblock content %}

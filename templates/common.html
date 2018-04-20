@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Hymnal – Boulder Hash House Harriers{% endblock %}</title>
+
+  <link rel="apple-touch-icon" href="{{base_path}}/apple-touch-icon.png">
+  <link rel="stylesheet" href="{{base_path}}/css/normalize.css">
+  <link rel="stylesheet" href="{{base_path}}/css/main.css">
+<!--[if lt IE 9]>
+  <script src="js/vendor/html5shiv-printshiv.min.js"></script>
+<![endif]-->  
+</head>
+<body>
+<div class="wrapper">
+  <nav>
+    <ul>
+      {% macro navitem(name, path) -%}
+        <li{% if path == url %} class="active"{% endif %}><a href="{{ base_path }}{{ path }}">{{ name }}</a></li>
+      {%- endmacro %}
+      {{ navitem("Home", "/") }}
+      {{ navitem("Categories", "/categories/") }} 
+      {{ navitem("Songs", "/songs/") }}
+      {{ navitem("By Category", "/bycategory/") }}
+      {{ navitem("First Lines", "/firstlines/") }}
+      {{ navitem("About", "/about/") }}
+    </ul>
+  </nav>
+  {% block content %}{% endblock %}
+</div>
+</body>
+<html>
+

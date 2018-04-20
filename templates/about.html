@@ -1,0 +1,19 @@
+{% extends "common.html" %}
+{% block title %}{{ super() }}—About{% endblock %}
+{% block content %}
+  <header>
+    <h1>About</h1>
+  </header>
+  <p>A collection of {{songbook.songs | count}} songs heard and sung by the Boulder Hash House Harriers.</p>
+
+  <p>Be warned, this is a collection of dirty drinking songs.  Many of them are obscene,
+  scatological, offensive, and in poor taste.  If this bothers you, please just give this
+  collection a pass.
+
+  <p>Except where otherwise noted, this website is licensed under the
+     <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike License</a>.
+
+  <hr>
+
+  <p>{% if metadata.git %}Version {{metadata.git.long_version}}, from commit <a href="https://github.com/weirdball/Songbook/commit/{{metadata.git.sha}}">{{metadata.git.sha}}</a>.  {% endif %}Generated on {{metadata.date|datetimeformat}} by Songbook {{metadata.version}}.
+{% endblock content %}

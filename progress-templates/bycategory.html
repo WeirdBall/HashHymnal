@@ -1,0 +1,18 @@
+{% extends "common.html" %}
+{% block title %}{{ super() }}—By Category{% endblock %}
+{% block content %}
+  <header>
+    <h1>Nursery Rhymes by Category</h1>
+  </header>
+  <h2><a href="categories/">Categories:</a></h2>
+  <ul>
+  {% for category in songbook.categories %}
+    <li><a name="{{category.slug}}" href="../categories/{{category.slug}}/">{{category.name | title}}</a></li>
+    <ul>
+    {% for song in category.songs %}
+      <li><a name="{{song.slug}}" href="../songs/{{song.slug}}/">{{song.title}}</a></li>
+    {% endfor %}
+    </ul>
+    {% endfor %}
+  </ul>
+{% endblock content %}

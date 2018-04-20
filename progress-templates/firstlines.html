@@ -1,0 +1,13 @@
+{% extends "common.html" %}
+{% block title %}{{ super() }}—by First Line{% endblock %}
+{% block content %}
+  <header>
+    <h1>Nursery Rhymes by First Line</h1>
+  </header>
+  <h2>First Lines</h2>
+  <ul>
+  {% for song in songbook.songs | sort(attribute="first_line", case_sensitive=false) %}
+    <li><a name="{{song.slug}}" href="../songs/{{song.slug}}/">{{song.first_line}}&hellip;</a></li>
+  {% endfor %}
+  </ul>
+{% endblock content %}

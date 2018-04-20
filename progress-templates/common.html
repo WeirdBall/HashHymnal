@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Hymnal – Boulder Hash House Harriers{% endblock %}</title>
+  <meta name="description" content="">
+
+  <link rel="apple-touch-icon" href="{{base_path}}/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="{{base_path}}/css/normalize.css">
+<link rel='stylesheet' id='divi-style-css'  href='http://boulderh3.com/wp-content/themes/Divi-child/style.css?ver=3.0.15' type='text/css' media='all' />
+  <link rel="stylesheet" href="{{base_path}}/css/main.css">
+<!--[if lt IE 9]>
+  <script src="js/vendor/html5shiv-printshiv.min.js"></script>
+<![endif]-->  
+</head>
+<body>
+<div id="page-container">
+
+<!-- boulderh3.com main heaader clone -->
+<header id="main-header" data-height-onload="37">
+  <div class="container clearfix et_menu_container">
+    <div id="et-top-navigation">
+      <nav id="top-menu-nav">
+        <ul id="top-menu" class="nav">
+          <li class=menu-item><a href="http://boulderh3.com/">Home</a></li>
+          <li class=menu-item><a href="http://boulderh3.com/hashes/">Hashes</a></li>
+          <li class=menu-item><a href="http://boulderh3.com/announcements/">Announcements</a></li>
+          <li class=menu-item><a href="http://boulderh3.com/calendar/">Calendar</a></li>
+          <li class=menu-item><a href="http://boulderh3.com/hashflash/">Hash Flash</a></li>
+          <li class=menu-item current-menu-item><a href="http://hymnal.boulderh3.com/">Hymnal</a></li>
+          <li class=menu-item><a href="http://boulderh3.com/about/">About</a></li>
+          <li class=menu-item><a href="http://boulderh3.com/contact/">Contact</a></li>
+        </ul>
+      </nav>
+      <div id="et_top_search"><span id="et_search_icon"></span></div>
+      <div id="et_mobile_nav_menu">
+        <div class="mobile_nav closed">
+          <span class="select_page">Select Page</span>
+          <span class="mobile_menu_bar mobile_menu_bar_toggle"></span>
+        </div>
+      </div>
+    </div> <!-- #et-top-navigation -->
+  </div> <!-- .container -->
+</header> <!-- #main-header -->
+
+  <nav class="hymnal-nav">
+    <ul>
+      {% macro navitem(name, path) -%}
+        <li{% if path == url %} class="active"{% endif %}><a href="{{ base_path }}{{ path }}">{{ name }}</a></li>
+      {%- endmacro %}
+      {{ navitem("Home", "/") }}
+      {{ navitem("Categories", "/categories/") }} 
+      {{ navitem("Songs", "/songs/") }}
+      {{ navitem("By Category", "/bycategory/") }}
+      {{ navitem("First Lines", "/firstlines/") }}
+      {{ navitem("About", "/about/") }}
+    </ul>
+  </nav>
+  {% block content %}{% endblock %}
+</div>
+<script type='text/javascript' src='{{base_path}}/js/nav-custom.js'></script>
+</body>
+<html>
+
